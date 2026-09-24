@@ -1,0 +1,265 @@
+[
+  {
+    "id": "ghormeh",
+    "name": "قورمه سبزی با گوشت گوسفندی",
+    "category": "خورشت سنتی",
+    "baseCalPer100g": 175,
+    "p": 11.2,
+    "c": 5.4,
+    "f": 12.1,
+    "units": [
+      { "key": "spoon", "label": "قاشق غذاخوری", "grams": 25, "cal": 44 },
+      { "key": "cup", "label": "پیاله / کاسه (۱۸۰g)", "grams": 180, "cal": 315 },
+      { "key": "g", "label": "گرم (Gram)", "grams": 1, "cal": 1.75 }
+    ]
+  },
+  {
+    "id": "gheimeh",
+    "name": "خورشت قیمه سیب‌زمینی",
+    "category": "خورشت سنتی",
+    "baseCalPer100g": 160,
+    "p": 9.5,
+    "c": 9.0,
+    "f": 9.8,
+    "units": [
+      { "key": "spoon", "label": "قاشق غذاخوری", "grams": 25, "cal": 40 },
+      { "key": "cup", "label": "پیاله / کاسه (۱۸۰g)", "grams": 180, "cal": 288 },
+      { "key": "g", "label": "گرم (Gram)", "grams": 1, "cal": 1.6 }
+    ]
+  },
+  {
+    "id": "fesenjan",
+    "name": "خورشت فسنجان با مرغ و گردو",
+    "category": "خورشت سنتی",
+    "baseCalPer100g": 245,
+    "p": 8.0,
+    "c": 12.5,
+    "f": 18.5,
+    "units": [
+      { "key": "spoon", "label": "قاشق غذاخوری", "grams": 25, "cal": 61 },
+      { "key": "cup", "label": "پیاله / کاسه", "grams": 180, "cal": 441 },
+      { "key": "g", "label": "گرم (Gram)", "grams": 1, "cal": 2.45 }
+    ]
+  },
+  {
+    "id": "joojeh",
+    "name": "چلو جوجه‌کباب زعفرانی",
+    "category": "چلوکباب",
+    "baseCalPer100g": 165,
+    "p": 22.0,
+    "c": 18.0,
+    "f": 5.0,
+    "units": [
+      { "key": "plate", "label": "پرس کامل استاندارد", "grams": 400, "cal": 660 },
+      { "key": "piece", "label": "سیخ فیله کبابی (۱۸۰g)", "grams": 180, "cal": 290 },
+      { "key": "spoon", "label": "قاشق برنج پلو", "grams": 25, "cal": 40 },
+      { "key": "g", "label": "گرم (Gram)", "grams": 1, "cal": 1.65 }
+    ]
+  },
+  {
+    "id": "koobideh",
+    "name": "کباب کوبیده سنتی اعلا",
+    "category": "چلوکباب",
+    "baseCalPer100g": 280,
+    "p": 17.5,
+    "c": 2.0,
+    "f": 23.0,
+    "units": [
+      { "key": "piece", "label": "یک سیخ (۱۱۰ گرم)", "grams": 110, "cal": 308 },
+      { "key": "plate", "label": "پرس با برنج و کره", "grams": 450, "cal": 820 },
+      { "key": "g", "label": "گرم (Gram)", "grams": 1, "cal": 2.8 }
+    ]
+  },
+  {
+    "id": "zereshkpolo",
+    "name": "زرشک‌پلو با مرغ مجلسی",
+    "category": "پلو سنتی",
+    "baseCalPer100g": 170,
+    "p": 14.0,
+    "c": 21.0,
+    "f": 6.0,
+    "units": [
+      { "key": "plate", "label": "پرس کامل مجلسی", "grams": 420, "cal": 710 },
+      { "key": "spoon", "label": "قاشق برنج زرشکی", "grams": 25, "cal": 42 },
+      { "key": "piece", "label": "ران مرغ پخته (۲۰۰g)", "grams": 200, "cal": 320 },
+      { "key": "g", "label": "گرم (Gram)", "grams": 1, "cal": 1.7 }
+    ]
+  },
+  {
+    "id": "sangak",
+    "name": "نان سنگک سنتی کنجدی برشته",
+    "category": "نان سنتی",
+    "baseCalPer100g": 260,
+    "p": 9.0,
+    "c": 52.0,
+    "f": 2.5,
+    "units": [
+      { "key": "palm", "label": "کف دست بدون انگشتان (۳۰g)", "grams": 30, "cal": 80 },
+      { "key": "piece", "label": "تکه متوسط (۵۰g)", "grams": 50, "cal": 130 },
+      { "key": "g", "label": "گرم (Gram)", "grams": 1, "cal": 2.6 }
+    ]
+  },
+  {
+    "id": "barbari",
+    "name": "نان بربری سنتی تازه",
+    "category": "نان سنتی",
+    "baseCalPer100g": 270,
+    "p": 8.5,
+    "c": 55.0,
+    "f": 2.0,
+    "units": [
+      { "key": "palm", "label": "کف دست (۳۰g)", "grams": 30, "cal": 82 },
+      { "key": "g", "label": "گرم (Gram)", "grams: 1", "cal": 2.7 }
+    ]
+  },
+  {
+    "id": "lavash",
+    "name": "نان لواش سنتی",
+    "category": "نان سنتی",
+    "baseCalPer100g": 290,
+    "p": 8.0,
+    "c": 60.0,
+    "f": 1.8,
+    "units": [
+      { "key": "palm", "label": "کف دست (۱۵g)", "grams": 15, "cal": 43 },
+      { "key": "piece", "label": "یک قرص نان کامل", "grams": 80, "cal": 232 },
+      { "key": "g", "label": "گرم (Gram)", "grams": 1, "cal": 2.9 }
+    ]
+  },
+  {
+    "id": "lighvan",
+    "name": "پنیر لیقوان تبریز گوسفندی",
+    "category": "لبنیات",
+    "baseCalPer100g": 295,
+    "p": 16.0,
+    "c": 2.0,
+    "f": 25.0,
+    "units": [
+      { "key": "piece", "label": "قوطی کبریت (۳۰g)", "grams": 30, "cal": 88 },
+      { "key": "spoon", "label": "قاشق غذاخوری", "grams": 20, "cal": 59 },
+      { "key": "g", "label": "گرم (Gram)", "grams": 1, "cal": 2.95 }
+    ]
+  },
+  {
+    "id": "walnut",
+    "name": "مغز گردو درجه یک ایرانی",
+    "category": "آجیل و مغزها",
+    "baseCalPer100g": 654,
+    "p": 15.2,
+    "c": 13.7,
+    "f": 65.2,
+    "units": [
+      { "key": "piece", "label": "عدد گردو کامل (مغز)", "grams": 7, "cal": 46 },
+      { "key": "spoon", "label": "قاشق غذاخوری خردشده", "grams": 15, "cal": 98 },
+      { "key": "g", "label": "گرم (Gram)", "grams": 1, "cal": 6.54 }
+    ]
+  },
+  {
+    "id": "egg",
+    "name": "تخم‌مرغ کامل آب‌پز",
+    "category": "پروتئین پایه",
+    "baseCalPer100g": 155,
+    "p": 13.0,
+    "c": 1.1,
+    "f": 11.0,
+    "units": [
+      { "key": "piece", "label": "یک عدد متوسط", "grams": 55, "cal": 85 },
+      { "key": "g", "label": "گرم (Gram)", "grams": 1, "cal": 1.55 }
+    ]
+  },
+  {
+    "id": "eggwhite",
+    "name": "سفیده تخم‌مرغ خالص",
+    "category": "پروتئین ورزشی",
+    "baseCalPer100g": 52,
+    "p": 11.0,
+    "c": 0.7,
+    "f": 0.2,
+    "units": [
+      { "key": "piece", "label": "سفیده ۱ عدد تخم‌مرغ", "grams": 33, "cal": 17 },
+      { "key": "g", "label": "گرم (Gram)", "grams": 1, "cal": 0.52 }
+    ]
+  },
+  {
+    "id": "omelet",
+    "name": "املت سنتی گوجه‌فرنگی قهوه‌خانه‌ای",
+    "category": "غذای فوری",
+    "baseCalPer100g": 145,
+    "p": 9.0,
+    "c": 4.0,
+    "f": 11.0,
+    "units": [
+      { "key": "plate", "label": "پرس تک‌نفره (۲ تخم‌مرغ)", "grams": 220, "cal": 320 },
+      { "key": "spoon", "label": "قاشق غذاخوری", "grams": 30, "cal": 44 },
+      { "key": "g", "label": "گرم (Gram)", "grams": 1, "cal": 1.45 }
+    ]
+  },
+  {
+    "id": "salad_shirazi",
+    "name": "سالاد شیرازی با آبغوره و روغن زیتون",
+    "category": "سالاد و سبزیجات",
+    "baseCalPer100g": 45,
+    "p": 1.2,
+    "c": 6.5,
+    "f": 2.2,
+    "units": [
+      { "key": "cup", "label": "پیاله متوسط", "grams": 150, "cal": 68 },
+      { "key": "spoon", "label": "قاشق غذاخوری", "grams": 25, "cal": 11 },
+      { "key": "g", "label": "گرم (Gram)", "grams": 1, "cal": 0.45 }
+    ]
+  },
+  {
+    "id": "apple",
+    "name": "سیب درختی قرمز دماوند",
+    "category": "میوه تازه",
+    "baseCalPer100g": 52,
+    "p": 0.3,
+    "c": 14.0,
+    "f": 0.2,
+    "units": [
+      { "key": "piece", "label": "یک عدد متوسط (۱۵۰g)", "grams": 150, "cal": 78 },
+      { "key": "g", "label": "گرم (Gram)", "grams": 1, "cal": 0.52 }
+    ]
+  },
+  {
+    "id": "date",
+    "name": "خرما مضافتی بم",
+    "category": "میوه و خشکبار",
+    "baseCalPer100g": 277,
+    "p": 1.8,
+    "c": 75.0,
+    "f": 0.2,
+    "units": [
+      { "key": "piece", "label": "یک عدد خرما (۱۰g)", "grams": 10, "cal": 28 },
+      { "key": "g", "label": "گرم (Gram)", "grams": 1, "cal": 2.77 }
+    ]
+  },
+  {
+    "id": "chicken_breast",
+    "name": "سینه مرغ گریل بدون پوست",
+    "category": "پروتئین ورزشی",
+    "baseCalPer100g": 165,
+    "p": 31.0,
+    "c": 0.0,
+    "f": 3.6,
+    "units": [
+      { "key": "piece", "label": "یک تکه فیله متوسط (۱۵۰g)", "grams": 150, "cal": 248 },
+      { "key": "g", "label": "گرم (Gram)", "grams": 1, "cal": 1.65 }
+    ]
+  },
+  {
+    "id": "rice_kateh",
+    "name": "برنج کته ایرانی با روغن ملایم",
+    "category": "پلو سنتی",
+    "baseCalPer100g": 145,
+    "p": 2.8,
+    "c": 30.5,
+    "f": 1.8,
+    "units": [
+      { "key": "spoon", "label": "قاشق غذاخوری سرپر", "grams": 25, "cal": 36 },
+      { "key": "cup", "label": "کفگیر پلو (۱۲۰g)", "grams": 120, "cal": 174 },
+      { "key": "plate", "label": "دیس تک‌نفره (۲۵۰g)", "grams": 250, "cal": 362 },
+      { "key": "g", "label": "گرم (Gram)", "grams": 1, "cal": 1.45 }
+    ]
+  }
+]
