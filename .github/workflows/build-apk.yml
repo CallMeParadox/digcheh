@@ -82,19 +82,20 @@ jobs:
       - name: Publish Official Release on GitHub
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v1.0.0
-          name: "دیگچه نسخه ۱.۰.۰ | Digcheh Official Android v1.0.0"
+          tag_name: v2.0.0
+          name: "دیگچه نسخه ۲.۰.۰ کاملاً نیتیو | Digcheh 100% Native Android v2.0.0"
           body: |
-            ## اپلیکیشن اندروید دیگچه (Digcheh Android APK) 🍲
+            ## اپلیکیشن کاملاً نیتیو اندروید دیگچه (Pure Native Android APK) 🍲📱
             
-            - **نسخه:** ۱.۰.۰ (رسمی و تست‌شده)
+            - **معماری:** ۱۰۰٪ نیتیو اندروید (Google Material Design 3 + AndroidX + Java)
+            - **بدون وب‌ویو (Zero WebView):** پیاده‌سازی کامل با کامپوننت‌های نیتیو اندروید
             - **نوع ساین:** Release Keystore رسمی با الگوریتم‌های استاندارد V1 + V2 + V3
             - **سازگاری:** اندروید ۵.۰ تا اندروید ۱۴ (API 21 - API 34)
-            - **امکانات:** کاملاً آفلاین، دارای بانک جامع غذاهای ایرانی، ماتریس انرژی و سیستم چیت‌میل هوشمند
+            - **امکانات:** ماتریس انرژی بنتو، ۴ وعده غذایی مجزا، باتم شیت متریال جستجوی غذا، پاپ‌اور تنظیم چیت‌میل، کارکرد کاملاً آفلاین
             
-            ### رفع خطاهای رایج:
-            - این فایل برخلاف نسخه‌های Debug، با کلید رسمی ساین شده و خطای قرمز **Unsafe App / Blocked by Play Protect** را برطرف می‌کند.
-            - در اولین نصب از منابع ناشناس، کافی است گزینه **«نصب در هر صورت / Install anyway»** یا مجوز فایل‌منیجر را تأیید کنید.
+            ### رفع خطای پلی‌پروتکت:
+            - امضا شده با کلید رسمی Release Keystore بدون خطای قرمز Play Protect.
           files: Digcheh.apk
+          make_latest: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_card_clean"
+    android:padding="24dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="8dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_sparkles"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cheat_meal_dialog_title"
+            android:textColor="@color/text_primary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cheat_meal_desc"
+        android:textColor="@color/text_secondary"
+        android:textSize="13sp"
+        android:layout_marginBottom="16dp" />
+
+    <RadioGroup
+        android:id="@+id/rgCheatInterval"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/rbCheat3Days"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="هر ۳ روز یک‌بار (رژیم فشرده)"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:checked="true"
+            android:padding="8dp" />
+
+        <RadioButton
+            android:id="@+id/rbCheat5Days"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="هر ۵ روز یک‌بار (رژیم متعادل)"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:padding="8dp" />
+
+        <RadioButton
+            android:id="@+id/rbCheat7Days"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="هر ۷ روز یک‌بار (پایان هفته)"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:padding="8dp" />
+
+        <RadioButton
+            android:id="@+id/rbCheat14Days"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="هر ۱۴ روز یک‌بار (کاهش وزن سخت‌گیرانه)"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:padding="8dp" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_marginTop="20dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCancelCheat"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel"
+            android:textColor="@color/text_secondary"
+            android:layout_marginEnd="8dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSaveCheat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/save"
+            android:textColor="@color/surface_white"
+            app:backgroundTint="@color/primary"
+            app:cornerRadius="14dp" />
+    </LinearLayout>
+</LinearLayout>

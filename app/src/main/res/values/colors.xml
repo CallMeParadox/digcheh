@@ -1,6 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Brand Emerald Colors -->
     <color name="primary">#10B981</color>
     <color name="primary_dark">#059669</color>
+    <color name="primary_light">#ECFDF5</color>
+    <color name="primary_border">#A7F3D0</color>
     <color name="accent">#10B981</color>
+
+    <!-- Surfaces & Neutrals -->
     <color name="background">#F8F9FA</color>
+    <color name="surface_white">#FFFFFF</color>
+    <color name="card_border">#EEF0F3</color>
+    <color name="divider">#F1F5F9</color>
+    <color name="text_primary">#0F172A</color>
+    <color name="text_secondary">#64748B</color>
+    <color name="text_hint">#94A3B8</color>
+
+    <!-- Macro Indicators -->
+    <color name="macro_protein">#3B82F6</color>
+    <color name="macro_protein_bg">#EFF6FF</color>
+    <color name="macro_carb">#F59E0B</color>
+    <color name="macro_carb_bg">#FFFBEB</color>
+    <color name="macro_fat">#EC4899</color>
+    <color name="macro_fat_bg">#FDF2F8</color>
+
+    <!-- Actions & States -->
+    <color name="danger">#EF4444</color>
+    <color name="danger_light">#FEF2F2</color>
+    <color name="gray_100">#F1F5F9</color>
+    <color name="gray_200">#E2E8F0</color>
 </resources>

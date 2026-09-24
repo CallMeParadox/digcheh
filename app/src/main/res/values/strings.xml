@@ -1,3 +1,42 @@
 <resources>
     <string name="app_name">دیگچه</string>
+    <string name="app_tagline">کالری‌شماری و پایش متابولیسم</string>
+    
+    <!-- Header & Date -->
+    <string name="cheat_meal_default">چیت‌میل: ۳ روز دیگر</string>
+    <string name="today">امروز</string>
+
+    <!-- Bento Energy Matrix -->
+    <string name="calorie_target_label">هدف روزانه</string>
+    <string name="calories_unit">کیلوکالری</string>
+    <string name="consumed_label">مصرف‌شده</string>
+    <string name="remaining_label">باقی‌مانده</string>
+    <string name="protein_title">پروتئین</string>
+    <string name="carb_title">کربوهیدرات</string>
+    <string name="fat_title">چربی</string>
+    <string name="grams_unit">گرم</string>
+
+    <!-- Meals -->
+    <string name="breakfast_title">صبحانه</string>
+    <string name="lunch_title">ناهار</string>
+    <string name="dinner_title">شام</string>
+    <string name="snack_title">میان‌وعده‌ها</string>
+    <string name="add_food_btn">+ افزودن</string>
+    <string name="empty_meal">هنوز غذایی ثبت نشده است</string>
+
+    <!-- Activity -->
+    <string name="activity_title">فعالیت‌های بدنی</string>
+    <string name="activity_subtitle">کالری سوزانده شده روزانه</string>
+    <string name="log_activity_btn">+ ثبت تمرین</string>
+
+    <!-- Dialogs -->
+    <string name="search_hint">جستجوی نام غذا (مثلاً قورمه‌سبزی، نان سنگک...)</string>
+    <string name="quantity_label">مقدار مصرفی:</string>
+    <string name="unit_label">واحد اندازه‌گیری:</string>
+    <string name="confirm_add">ثبت غذا در وعده</string>
+    <string name="cancel">انصراف</string>
+    <string name="delete">حذف</string>
+    <string name="cheat_meal_dialog_title">تنظیم چرخه چیت‌میل</string>
+    <string name="cheat_meal_desc">هر چند روز یک‌بار می‌خواهید وعده آزاد (چیت‌میل) داشته باشید؟</string>
+    <string name="save">ذخیره</string>
 </resources>

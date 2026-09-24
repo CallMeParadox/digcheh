@@ -1,6 +1,21 @@
 <resources>
-    <style name="Theme.Digcheh" parent="@android:style/Theme.Light.NoTitleBar">
+    <style name="Theme.Digcheh" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary Brand Colors -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_dark</item>
+        <item name="colorOnPrimary">@color/surface_white</item>
+        <item name="colorSecondary">@color/primary</item>
+        <item name="colorSecondaryVariant">@color/primary_dark</item>
+        <item name="colorOnSecondary">@color/surface_white</item>
+
+        <!-- Window & Backgrounds -->
         <item name="android:windowBackground">@color/background</item>
         <item name="android:statusBarColor">@color/background</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/surface_white</item>
+        
+        <!-- Ripple & Surface -->
+        <item name="colorSurface">@color/surface_white</item>
+        <item name="colorOnSurface">@color/text_primary</item>
     </style>
 </resources>
