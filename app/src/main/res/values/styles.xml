@@ -8,6 +8,10 @@
         <item name="colorSecondaryVariant">@color/primary_dark</item>
         <item name="colorOnSecondary">@color/surface_white</item>
 
+        <!-- Typography: Global Vazirmatn -->
+        <item name="fontFamily">@font/vazirmatn</item>
+        <item name="android:fontFamily">@font/vazirmatn</item>
+
         <!-- Window & Backgrounds -->
         <item name="android:windowBackground">@color/background</item>
         <item name="android:statusBarColor">@color/background</item>
@@ -17,5 +21,16 @@
         <!-- Ripple & Surface -->
         <item name="colorSurface">@color/surface_white</item>
         <item name="colorOnSurface">@color/text_primary</item>
+
+        <!-- BottomSheetDialog theme -->
+        <item name="bottomSheetDialogTheme">@style/CustomBottomSheetDialog</item>
+    </style>
+
+    <style name="CustomBottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/CustomBottomSheet</item>
+    </style>
+
+    <style name="CustomBottomSheet" parent="Widget.MaterialComponents.BottomSheet">
+        <item name="android:background">@android:color/transparent</item>
     </style>
 </resources>

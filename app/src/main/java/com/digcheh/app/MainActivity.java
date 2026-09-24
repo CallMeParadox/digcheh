@@ -29,6 +29,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 
+import android.content.Intent;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -39,12 +40,9 @@ public class MainActivity extends AppCompatActivity {
 
     private DataManager dataManager;
     private Calendar currentCalendar = Calendar.getInstance();
-    private static final int CALORIE_GOAL = 2100;
-    private static final int PROTEIN_GOAL = 110;
-    private static final int CARB_GOAL = 220;
-    private static final int FAT_GOAL = 65;
 
     // UI Views
+    private TextView tvHeaderGreeting, tvDietSubtitle;
     private TextView tvCheatMealStatus, tvDateDisplay;
     private TextView tvTotalCalories, tvCalorieTarget;
     private ProgressBar pbMainCalories;
@@ -60,9 +58,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
         dataManager = DataManager.getInstance(this);
+
+        if (!dataManager.isUserOnboarded()) {
+            startActivity(new Intent(this, OnboardingActivity.class));
+            finish();
+            return;
+        }
+
+        setContentView(R.layout.activity_main);
 
         initViews();
         setupListeners();
@@ -70,7 +74,17 @@ public class MainActivity extends AppCompatActivity {
         refreshAllData();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (dataManager != null && dataManager.isUserOnboarded()) {
+            refreshAllData();
+        }
+    }
+
     private void initViews() {
+        tvHeaderGreeting = findViewById(R.id.tvHeaderGreeting);
+        tvDietSubtitle = findViewById(R.id.tvDietSubtitle);
         tvCheatMealStatus = findViewById(R.id.tvCheatMealStatus);
         tvDateDisplay = findViewById(R.id.tvDateDisplay);
 
@@ -105,6 +119,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupListeners() {
+        // Brand Header click -> edit profile & diet
+        findViewById(R.id.layoutBrandHeader).setOnClickListener(v -> {
+            Intent intent = new Intent(this, OnboardingActivity.class);
+            startActivity(intent);
+        });
+
         // Date navigation
         findViewById(R.id.btnPrevDay).setOnClickListener(v -> {
             currentCalendar.add(Calendar.DAY_OF_YEAR, -1);
@@ -153,6 +173,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void refreshAllData() {
+        UserProfile profile = dataManager.getUserProfile();
+        int calorieGoal = profile.getTargetCalories();
+        int proteinGoal = profile.getTargetProtein();
+        int carbGoal = profile.getTargetCarbs();
+        int fatGoal = profile.getTargetFat();
+
+        tvHeaderGreeting.setText("سلام، " + profile.getName());
+        tvDietSubtitle.setText("رژیم: " + profile.getDietNameFa() + " • برای تغییر ضربه بزنید");
+
         // 1. Cheat meal status
         int cheatDays = dataManager.getCheatCycleDays();
         tvCheatMealStatus.setText("چیت‌میل: " + toPersianDigits(cheatDays) + " روز دیگر");
@@ -163,26 +192,26 @@ public class MainActivity extends AppCompatActivity {
         int netCalories = Math.max(0, totalConsumed - totalBurned);
 
         tvTotalCalories.setText(toPersianDigits(netCalories));
-        tvCalorieTarget.setText("از " + toPersianDigits(CALORIE_GOAL) + " kcal");
-        pbMainCalories.setMax(CALORIE_GOAL);
-        pbMainCalories.setProgress(Math.min(netCalories, CALORIE_GOAL));
+        tvCalorieTarget.setText("از " + toPersianDigits(calorieGoal) + " kcal");
+        pbMainCalories.setMax(calorieGoal);
+        pbMainCalories.setProgress(Math.min(netCalories, calorieGoal));
 
         // Macros
         int totalProt = dataManager.getTotalProtein();
         int totalCarb = dataManager.getTotalCarbs();
         int totalFat = dataManager.getTotalFat();
 
-        tvProteinCount.setText(toPersianDigits(totalProt) + "g / " + toPersianDigits(PROTEIN_GOAL) + "g");
-        pbProtein.setMax(PROTEIN_GOAL);
-        pbProtein.setProgress(Math.min(totalProt, PROTEIN_GOAL));
+        tvProteinCount.setText(toPersianDigits(totalProt) + "g / " + toPersianDigits(proteinGoal) + "g");
+        pbProtein.setMax(proteinGoal);
+        pbProtein.setProgress(Math.min(totalProt, proteinGoal));
 
-        tvCarbCount.setText(toPersianDigits(totalCarb) + "g / " + toPersianDigits(CARB_GOAL) + "g");
-        pbCarb.setMax(CARB_GOAL);
-        pbCarb.setProgress(Math.min(totalCarb, CARB_GOAL));
+        tvCarbCount.setText(toPersianDigits(totalCarb) + "g / " + toPersianDigits(carbGoal) + "g");
+        pbCarb.setMax(carbGoal);
+        pbCarb.setProgress(Math.min(totalCarb, carbGoal));
 
-        tvFatCount.setText(toPersianDigits(totalFat) + "g / " + toPersianDigits(FAT_GOAL) + "g");
-        pbFat.setMax(FAT_GOAL);
-        pbFat.setProgress(Math.min(totalFat, FAT_GOAL));
+        tvFatCount.setText(toPersianDigits(totalFat) + "g / " + toPersianDigits(fatGoal) + "g");
+        pbFat.setMax(fatGoal);
+        pbFat.setProgress(Math.min(totalFat, fatGoal));
 
         // Burned calories
         tvBurnedCalories.setText(toPersianDigits(totalBurned) + " kcal سوزانده‌شده");

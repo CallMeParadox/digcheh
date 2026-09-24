@@ -16,12 +16,15 @@ public class DataManager {
     private static final String KEY_LOGGED_FOODS = "logged_foods";
     private static final String KEY_CHEAT_DAYS = "cheat_days";
     private static final String KEY_BURNED_CALS = "burned_cals";
+    private static final String KEY_USER_PROFILE = "user_profile";
+    private static final String KEY_IS_ONBOARDED = "is_onboarded";
 
     private static DataManager instance;
     private final SharedPreferences prefs;
     private final Gson gson;
     private final List<FoodItem> foodCatalog = new ArrayList<>();
     private final List<LoggedFood> loggedFoods = new ArrayList<>();
+    private UserProfile userProfile;
     private int cheatCycleDays = 3;
     private int burnedCalories = 150;
 
@@ -75,6 +78,13 @@ public class DataManager {
     private void loadSavedData() {
         cheatCycleDays = prefs.getInt(KEY_CHEAT_DAYS, 3);
         burnedCalories = prefs.getInt(KEY_BURNED_CALS, 150);
+        String profileJson = prefs.getString(KEY_USER_PROFILE, null);
+        if (profileJson != null) {
+            userProfile = gson.fromJson(profileJson, UserProfile.class);
+        }
+        if (userProfile == null) {
+            userProfile = new UserProfile();
+        }
         String json = prefs.getString(KEY_LOGGED_FOODS, null);
         if (json != null) {
             Type type = new TypeToken<ArrayList<LoggedFood>>() {}.getType();
@@ -184,5 +194,27 @@ public class DataManager {
     public void addBurnedCalories(int cals) {
         this.burnedCalories += cals;
         prefs.edit().putInt(KEY_BURNED_CALS, burnedCalories).apply();
+    }
+
+    public boolean isUserOnboarded() {
+        return prefs.getBoolean(KEY_IS_ONBOARDED, false);
+    }
+
+    public void setUserOnboarded(boolean onboarded) {
+        prefs.edit().putBoolean(KEY_IS_ONBOARDED, onboarded).apply();
+    }
+
+    public UserProfile getUserProfile() {
+        if (userProfile == null) {
+            userProfile = new UserProfile();
+        }
+        return userProfile;
+    }
+
+    public void saveUserProfile(UserProfile profile) {
+        this.userProfile = profile;
+        this.userProfile.calculateMetabolism();
+        String json = gson.toJson(this.userProfile);
+        prefs.edit().putString(KEY_USER_PROFILE, json).putBoolean(KEY_IS_ONBOARDED, true).apply();
     }
 }
