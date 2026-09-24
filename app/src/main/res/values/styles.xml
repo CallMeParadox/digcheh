@@ -3,10 +3,10 @@
         <!-- Primary Brand Colors -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/primary_dark</item>
-        <item name="colorOnPrimary">@color/surface_white</item>
+        <item name="colorOnPrimary">@color/text_primary</item>
         <item name="colorSecondary">@color/primary</item>
         <item name="colorSecondaryVariant">@color/primary_dark</item>
-        <item name="colorOnSecondary">@color/surface_white</item>
+        <item name="colorOnSecondary">@color/text_primary</item>
 
         <!-- Typography: Global Vazirmatn -->
         <item name="fontFamily">@font/vazirmatn</item>
@@ -27,14 +27,14 @@
         <item name="textAppearanceCaption">@style/AppTextAppearance</item>
         <item name="textAppearanceOverline">@style/AppTextAppearance</item>
 
-        <!-- Window & Backgrounds -->
+        <!-- Window & Backgrounds (Obsidian Dark) -->
         <item name="android:windowBackground">@color/background</item>
         <item name="android:statusBarColor">@color/background</item>
-        <item name="android:windowLightStatusBar">true</item>
-        <item name="android:navigationBarColor">@color/surface_white</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">@color/surface_card</item>
         
         <!-- Ripple & Surface -->
-        <item name="colorSurface">@color/surface_white</item>
+        <item name="colorSurface">@color/surface_card</item>
         <item name="colorOnSurface">@color/text_primary</item>
 
         <!-- BottomSheetDialog theme -->
@@ -44,12 +44,14 @@
     <style name="AppTextAppearance" parent="TextAppearance.MaterialComponents.Body1">
         <item name="fontFamily">@font/vazirmatn</item>
         <item name="android:fontFamily">@font/vazirmatn</item>
+        <item name="android:textColor">@color/text_primary</item>
     </style>
 
     <style name="AppTextAppearance.Headline" parent="TextAppearance.MaterialComponents.Headline6">
         <item name="fontFamily">@font/vazirmatn</item>
         <item name="android:fontFamily">@font/vazirmatn</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_primary</item>
     </style>
 
     <style name="AppTextAppearance.Button" parent="TextAppearance.MaterialComponents.Button">

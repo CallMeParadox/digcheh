@@ -1,6 +1,7 @@
 package com.digcheh.app;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -21,9 +23,9 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,7 +33,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 
-import android.content.Intent;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -43,7 +44,15 @@ public class MainActivity extends AppCompatActivity {
     private DataManager dataManager;
     private Calendar currentCalendar = Calendar.getInstance();
 
-    // UI Views
+    // ==================== TAB CONTAINERS ====================
+    private View tabViewDiary, tabViewTrends, tabViewRecipes, tabViewProfile;
+
+    // ==================== BOTTOM NAVIGATION WIDGETS ====================
+    private LinearLayout navTabDiary, navTabTrends, navTabRecipes, navTabProfile;
+    private ImageView ivNavDiary, ivNavTrends, ivNavRecipes, ivNavProfile;
+    private TextView tvNavDiary, tvNavTrends, tvNavRecipes, tvNavProfile;
+
+    // ==================== TAB 1: DIARY VIEWS ====================
     private TextView tvHeaderGreeting, tvDietSubtitle, tvHeroDietBadge;
     private TextView tvCheatMealStatus, tvDateDisplay;
     private TextView tvTotalCalories, tvCalEaten, tvCalPercent, tvCalTarget;
@@ -52,10 +61,17 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar pbProtein, pbCarb, pbFat;
     private TextView tvBurnedCalories;
 
-    // Meal containers
     private TextView tvBreakfastCalories, tvLunchCalories, tvDinnerCalories, tvSnacksCalories;
     private LinearLayout llBreakfastItems, llLunchItems, llDinnerItems, llSnacksItems;
     private TextView tvBreakfastEmpty, tvLunchEmpty, tvDinnerEmpty, tvSnacksEmpty;
+
+    // ==================== TAB 2: TRENDS VIEWS ====================
+    private TextView tvConsistencyStat, tvWeightTrendText, tvBmiDisplay;
+    private ProgressBar pbWeightProgress;
+
+    // ==================== TAB 4: PROFILE VIEWS ====================
+    private TextView tvProfileName, tvProfileEmail, tvProfileBMR, tvProfileTDEE;
+    private TextView tvProfileDietName, tvProfileDietMacros;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initViews();
+        setupNavigation();
         setupListeners();
         updateDateDisplay();
         refreshAllData();
@@ -88,6 +105,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initViews() {
+        // Tab Containers
+        tabViewDiary = findViewById(R.id.tabViewDiary);
+        tabViewTrends = findViewById(R.id.tabViewTrends);
+        tabViewRecipes = findViewById(R.id.tabViewRecipes);
+        tabViewProfile = findViewById(R.id.tabViewProfile);
+
+        // Bottom Nav Items
+        navTabDiary = findViewById(R.id.navTabDiary);
+        navTabTrends = findViewById(R.id.navTabTrends);
+        navTabRecipes = findViewById(R.id.navTabRecipes);
+        navTabProfile = findViewById(R.id.navTabProfile);
+
+        ivNavDiary = findViewById(R.id.ivNavDiary);
+        ivNavTrends = findViewById(R.id.ivNavTrends);
+        ivNavRecipes = findViewById(R.id.ivNavRecipes);
+        ivNavProfile = findViewById(R.id.ivNavProfile);
+
+        tvNavDiary = findViewById(R.id.tvNavDiary);
+        tvNavTrends = findViewById(R.id.tvNavTrends);
+        tvNavRecipes = findViewById(R.id.tvNavRecipes);
+        tvNavProfile = findViewById(R.id.tvNavProfile);
+
+        // Diary Header & Bento Matrix
         tvHeaderGreeting = findViewById(R.id.tvHeaderGreeting);
         tvDietSubtitle = findViewById(R.id.tvDietSubtitle);
         tvHeroDietBadge = findViewById(R.id.tvHeroDietBadge);
@@ -111,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
         pbCarb = findViewById(R.id.pbCarb);
         pbFat = findViewById(R.id.pbFat);
 
+        // Meals
         tvBreakfastCalories = findViewById(R.id.tvBreakfastCalories);
         tvLunchCalories = findViewById(R.id.tvLunchCalories);
         tvDinnerCalories = findViewById(R.id.tvDinnerCalories);
@@ -127,17 +168,63 @@ public class MainActivity extends AppCompatActivity {
         tvSnacksEmpty = findViewById(R.id.tvSnacksEmpty);
 
         tvBurnedCalories = findViewById(R.id.tvBurnedCalories);
+
+        // Trends Views
+        tvConsistencyStat = findViewById(R.id.tvConsistencyStat);
+        tvWeightTrendText = findViewById(R.id.tvWeightTrendText);
+        tvBmiDisplay = findViewById(R.id.tvBmiDisplay);
+        pbWeightProgress = findViewById(R.id.pbWeightProgress);
+
+        // Profile Views
+        tvProfileName = findViewById(R.id.tvProfileName);
+        tvProfileEmail = findViewById(R.id.tvProfileEmail);
+        tvProfileBMR = findViewById(R.id.tvProfileBMR);
+        tvProfileTDEE = findViewById(R.id.tvProfileTDEE);
+        tvProfileDietName = findViewById(R.id.tvProfileDietName);
+        tvProfileDietMacros = findViewById(R.id.tvProfileDietMacros);
+    }
+
+    private void setupNavigation() {
+        navTabDiary.setOnClickListener(v -> switchTab(0));
+        navTabTrends.setOnClickListener(v -> switchTab(1));
+        navTabRecipes.setOnClickListener(v -> switchTab(2));
+        navTabProfile.setOnClickListener(v -> switchTab(3));
+    }
+
+    private void switchTab(int tabIndex) {
+        tabViewDiary.setVisibility(tabIndex == 0 ? View.VISIBLE : View.GONE);
+        tabViewTrends.setVisibility(tabIndex == 1 ? View.VISIBLE : View.GONE);
+        tabViewRecipes.setVisibility(tabIndex == 2 ? View.VISIBLE : View.GONE);
+        tabViewProfile.setVisibility(tabIndex == 3 ? View.VISIBLE : View.GONE);
+
+        int colorPrimary = ContextCompat.getColor(this, R.color.primary);
+        int colorMuted = ContextCompat.getColor(this, R.color.text_secondary);
+
+        // Reset all icons & text
+        ivNavDiary.setColorFilter(tabIndex == 0 ? colorPrimary : colorMuted);
+        tvNavDiary.setTextColor(tabIndex == 0 ? colorPrimary : colorMuted);
+
+        ivNavTrends.setColorFilter(tabIndex == 1 ? colorPrimary : colorMuted);
+        tvNavTrends.setTextColor(tabIndex == 1 ? colorPrimary : colorMuted);
+
+        ivNavRecipes.setColorFilter(tabIndex == 2 ? colorPrimary : colorMuted);
+        tvNavRecipes.setTextColor(tabIndex == 2 ? colorPrimary : colorMuted);
+
+        ivNavProfile.setColorFilter(tabIndex == 3 ? colorPrimary : colorMuted);
+        tvNavProfile.setTextColor(tabIndex == 3 ? colorPrimary : colorMuted);
+
+        if (tabIndex == 1) {
+            refreshTrendsData();
+        } else if (tabIndex == 3) {
+            refreshProfileData();
+        }
+
+        FontHelper.applyVazirmatn(getWindow().getDecorView(), this);
     }
 
     private void setupListeners() {
-        // Brand Header click -> edit profile & diet
+        // Diary header click -> edit profile
         findViewById(R.id.layoutBrandHeader).setOnClickListener(v -> {
-            Intent intent = new Intent(this, OnboardingActivity.class);
-            startActivity(intent);
-        });
-
-        // Edit profile banner at bottom
-        findViewById(R.id.cardEditProfileBanner).setOnClickListener(v -> {
             Intent intent = new Intent(this, OnboardingActivity.class);
             startActivity(intent);
         });
@@ -162,11 +249,25 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btnAddDinner).setOnClickListener(v -> showAddFoodBottomSheet("dinner", "شام"));
         findViewById(R.id.btnAddSnack).setOnClickListener(v -> showAddFoodBottomSheet("snack", "میان‌وعده‌ها"));
 
-        // Activity log button
+        // Workout log button
         findViewById(R.id.btnAddActivity).setOnClickListener(v -> {
-            dataManager.addBurnedCalories(100);
+            dataManager.addBurnedCalories(120);
             refreshAllData();
-            Toast.makeText(this, "۱۰۰ کیلوکالری فعالیت ثبت شد!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "۱۲۰ کیلوکالری فعالیت ورزشی ثبت شد!", Toast.LENGTH_SHORT).show();
+        });
+
+        // Trends: Log weight button
+        findViewById(R.id.btnLogWeight).setOnClickListener(v -> showLogWeightDialog());
+
+        // Profile buttons
+        findViewById(R.id.btnEditBiometrics).setOnClickListener(v -> {
+            Intent intent = new Intent(this, OnboardingActivity.class);
+            startActivity(intent);
+        });
+
+        findViewById(R.id.btnChangeDiet).setOnClickListener(v -> {
+            Intent intent = new Intent(this, OnboardingActivity.class);
+            startActivity(intent);
         });
     }
 
@@ -251,7 +352,50 @@ public class MainActivity extends AppCompatActivity {
         renderMeal("dinner", llDinnerItems, tvDinnerCalories, tvDinnerEmpty);
         renderMeal("snack", llSnacksItems, tvSnacksCalories, tvSnacksEmpty);
 
+        refreshTrendsData();
+        refreshProfileData();
+
         FontHelper.applyVazirmatn(getWindow().getDecorView(), this);
+    }
+
+    private void refreshTrendsData() {
+        UserProfile profile = dataManager.getUserProfile();
+        double w = profile.getWeightKg();
+        double tw = profile.getTargetWeightKg();
+        double hM = profile.getHeightCm() / 100.0;
+        double bmi = (hM > 0) ? (w / (hM * hM)) : 22.0;
+
+        String bmiStatus = bmi < 18.5 ? "کم‌وزن" : bmi < 25.0 ? "طبیعی و متناسب" : bmi < 30.0 ? "اضافه‌وزن خفیف" : "چاقی";
+        tvBmiDisplay.setText("شاخص توده بدنی (BMI): " + String.format(Locale.US, "%.1f", bmi) + " (" + bmiStatus + ")");
+
+        double diff = w - tw;
+        if (diff > 0) {
+            tvWeightTrendText.setText("وزن فعلی: " + toPersianDigits((int) w) + " kg | هدف: " + toPersianDigits((int) tw) + " kg (" + toPersianDigits((int) diff) + " کیلوگرم تا هدف)");
+        } else {
+            tvWeightTrendText.setText("وزن فعلی: " + toPersianDigits((int) w) + " kg | هدف: " + toPersianDigits((int) tw) + " kg (در محدوده تثبیت)");
+        }
+
+        int progress = (int) Math.min(100, Math.max(15, 100 - (diff * 10)));
+        pbWeightProgress.setProgress(progress);
+    }
+
+    private void refreshProfileData() {
+        UserProfile profile = dataManager.getUserProfile();
+        tvProfileName.setText(profile.getName());
+        tvProfileEmail.setText(profile.getEmail());
+        tvProfileBMR.setText(toPersianDigits(profile.getBmr()) + " kcal");
+        tvProfileTDEE.setText(toPersianDigits(profile.getTdee()) + " kcal");
+        tvProfileDietName.setText(profile.getDietNameFa());
+
+        String macrosRatio = "۵۰٪ کربوهیدرات | ۲۰٪ پروتئین | ۳۰٪ چربی";
+        if ("keto".equalsIgnoreCase(profile.getDietType())) {
+            macrosRatio = "۷۰٪ چربی سالم | ۲۵٪ پروتئین | ۵٪ کربوهیدرات";
+        } else if ("high_protein".equalsIgnoreCase(profile.getDietType())) {
+            macrosRatio = "۳۵٪ پروتئین | ۴۰٪ کربوهیدرات | ۲۵٪ چربی";
+        } else if ("mediterranean".equalsIgnoreCase(profile.getDietType())) {
+            macrosRatio = "۴۵٪ کربوهیدرات | ۲۰٪ پروتئین | ۳۵٪ چربی";
+        }
+        tvProfileDietMacros.setText(macrosRatio);
     }
 
     private void renderMeal(String mealType, LinearLayout container, TextView tvCalories, TextView tvEmpty) {
@@ -289,7 +433,7 @@ public class MainActivity extends AppCompatActivity {
                 tvCarbBadge.setText("کربو: " + toPersianDigits(food.getCarbs()) + "g");
                 tvFatBadge.setText("چربی: " + toPersianDigits(food.getFat()) + "g");
 
-                // Progressive Disclosure (Accordion)
+                // Accordion Progressive Disclosure
                 itemView.setOnClickListener(v -> {
                     if (layoutExpanded.getVisibility() == View.VISIBLE) {
                         layoutExpanded.setVisibility(View.GONE);
@@ -332,14 +476,12 @@ public class MainActivity extends AppCompatActivity {
 
         final FoodItem[] selectedFood = new FoodItem[1];
 
-        // Search adapter setup
         rvResults.setLayoutManager(new LinearLayoutManager(this));
         FoodSearchAdapter adapter = new FoodSearchAdapter(dataManager.getFoodCatalog(), food -> {
             selectedFood[0] = food;
             layoutConfig.setVisibility(View.VISIBLE);
             tvSelectedFoodTitle.setText(food.getName());
 
-            // Unit spinner
             ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, food.getAvailableUnits());
             spUnit.setAdapter(spinnerAdapter);
 
@@ -475,6 +617,38 @@ public class MainActivity extends AppCompatActivity {
         });
 
         dialog.show();
+    }
+
+    private void showLogWeightDialog() {
+        Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_cheat_meal, null);
+
+        // Simple prompt using AlertDialog
+        android.widget.EditText input = new android.widget.EditText(this);
+        input.setInputType(android.text.InputType.TYPE_CLASS_NUMBER | android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        input.setHint("مثلاً ۷۵.۵");
+        input.setTextColor(ContextCompat.getColor(this, R.color.text_primary));
+        input.setHintTextColor(ContextCompat.getColor(this, R.color.text_hint));
+        input.setText(String.valueOf(dataManager.getUserProfile().getWeightKg()));
+
+        new androidx.appcompat.app.AlertDialog.Builder(this)
+                .setTitle("⚖️ ثبت وزن امروز")
+                .setMessage("وزن دقیق امروز خود را بر حسب کیلوگرم وارد کنید:")
+                .setView(input)
+                .setPositiveButton("ذخیره", (d, which) -> {
+                    try {
+                        double newWeight = Double.parseDouble(input.getText().toString().trim());
+                        UserProfile p = dataManager.getUserProfile();
+                        p.setWeightKg(newWeight);
+                        p.calculateMetabolism();
+                        dataManager.saveUserProfile(p);
+                        refreshAllData();
+                        Toast.makeText(this, "وزن جدید ذخیره شد و متابولیسم به‌روزرسانی شد!", Toast.LENGTH_SHORT).show();
+                    } catch (Exception ignored) {}
+                })
+                .setNegativeButton("انصراف", null)
+                .show();
     }
 
     private String toPersianDigits(int number) {
