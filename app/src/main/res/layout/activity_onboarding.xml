@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingHorizontal="20dp"
-        android:paddingTop="30dp"
-        android:paddingBottom="40dp">
+        android:paddingTop="28dp"
+        android:paddingBottom="44dp">
 
         <!-- Top Brand Icon & Name -->
         <LinearLayout
@@ -57,7 +57,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- ==================== STEP 1: EMAIL & ACCOUNT ==================== -->
+        <!-- ==================== STEP 1: IDENTITY & BIOMETRICS ==================== -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardStep1"
             android:layout_width="match_parent"
@@ -78,7 +78,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="۱. اطلاعات حساب کاربری"
+                    android:text="۱. مشخصات فردی و ابعاد بدنی"
                     android:textColor="@color/primary"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -87,9 +87,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="لطفاً نام و آدرس ایمیل خود را برای همگام‌سازی وارد کنید:"
+                    android:text="اطلاعات برای محاسبه اختصاصی BMR و TDEE استفاده می‌شود:"
                     android:textColor="@color/text_secondary"
-                    android:textSize="13sp"
+                    android:textSize="12sp"
                     android:layout_marginBottom="16dp" />
 
                 <!-- Name Input -->
@@ -123,7 +123,8 @@
                     app:boxCornerRadiusTopEnd="14dp"
                     app:boxCornerRadiusBottomStart="14dp"
                     app:boxCornerRadiusBottomEnd="14dp"
-                    android:hint="آدرس ایمیل">
+                    android:hint="آدرس ایمیل"
+                    android:layout_marginBottom="16dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etUserEmail"
@@ -133,10 +134,193 @@
                         android:text="paradox@digcheh.ir"
                         android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Gender Selection Cards -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="جنسیت زیستی:"
+                    android:textColor="@color/text_primary"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
+
+                    <!-- Male Card -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardGenderMale"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="2dp"
+                        app:strokeColor="@color/primary"
+                        app:cardBackgroundColor="@color/primary_light"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_marginEnd="8dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center"
+                            android:paddingVertical="12dp">
+
+                            <TextView
+                                android:id="@+id/tvGenderMaleText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="👨 آقا (مرد)"
+                                android:textColor="@color/primary"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Female Card -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardGenderFemale"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="@color/card_border"
+                        app:cardBackgroundColor="@color/surface_white"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center"
+                            android:paddingVertical="12dp">
+
+                            <TextView
+                                android:id="@+id/tvGenderFemaleText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="👩 خانم (زن)"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+                <!-- Biometrics 2x2 Grid -->
+                <!-- Age & Height Row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="10dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/primary"
+                        app:boxCornerRadiusTopStart="14dp"
+                        app:boxCornerRadiusTopEnd="14dp"
+                        app:boxCornerRadiusBottomStart="14dp"
+                        app:boxCornerRadiusBottomEnd="14dp"
+                        android:hint="سن (سال)"
+                        android:layout_marginEnd="8dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etAge"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:text="26"
+                            android:gravity="center" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/primary"
+                        app:boxCornerRadiusTopStart="14dp"
+                        app:boxCornerRadiusTopEnd="14dp"
+                        app:boxCornerRadiusBottomStart="14dp"
+                        app:boxCornerRadiusBottomEnd="14dp"
+                        android:hint="قد (سانتی‌متر)">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etHeight"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"
+                            android:text="178"
+                            android:gravity="center" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <!-- Current Weight & Target Weight Row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/primary"
+                        app:boxCornerRadiusTopStart="14dp"
+                        app:boxCornerRadiusTopEnd="14dp"
+                        app:boxCornerRadiusBottomStart="14dp"
+                        app:boxCornerRadiusBottomEnd="14dp"
+                        android:hint="وزن فعلی (kg)"
+                        android:layout_marginEnd="8dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etWeight"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"
+                            android:text="78"
+                            android:gravity="center" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/primary"
+                        app:boxCornerRadiusTopStart="14dp"
+                        app:boxCornerRadiusTopEnd="14dp"
+                        app:boxCornerRadiusBottomStart="14dp"
+                        app:boxCornerRadiusBottomEnd="14dp"
+                        android:hint="وزن هدف (kg)">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etTargetWeight"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"
+                            android:text="72"
+                            android:gravity="center" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- ==================== STEP 2: BIOMETRICS ==================== -->
+        <!-- ==================== STEP 2: ACTIVITY LEVEL ==================== -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardStep2"
             android:layout_width="match_parent"
@@ -157,7 +341,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="۲. مشخصات فیزیکی و بیومتریک"
+                    android:text="۲. سطح فعالیت بدنی روزمره"
                     android:textColor="@color/primary"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -166,139 +350,166 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="برای محاسبه اختصاصی BMR و TDEE مطابق فرمول میفلین-سنت ژئور:"
+                    android:text="میزان فعالیت برای محاسبه ضریب سوخت‌وساز کل (TDEE):"
                     android:textColor="@color/text_secondary"
                     android:textSize="12sp"
-                    android:layout_marginBottom="14dp" />
+                    android:layout_marginBottom="12dp" />
 
-                <!-- Gender Radio -->
-                <RadioGroup
-                    android:id="@+id/rgGender"
+                <!-- Activity Option 1: Sedentary -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardActSedentary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="12dp">
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/card_border"
+                    app:cardBackgroundColor="@color/surface_white"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_marginBottom="8dp">
 
-                    <RadioButton
-                        android:id="@+id/rbMale"
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="آقا (مرد)"
-                        android:checked="true"
-                        android:textColor="@color/text_primary" />
+                        android:orientation="vertical"
+                        android:padding="12dp">
 
-                    <RadioButton
-                        android:id="@+id/rbFemale"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="خانم (زن)"
-                        android:textColor="@color/text_primary" />
-                </RadioGroup>
+                        <TextView
+                            android:id="@+id/tvActSedentaryTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🛋️ کم‌تحرک (پشت‌میزنشین و بدون ورزش)"
+                            android:textColor="@color/text_primary"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
 
-                <!-- Age & Height Row -->
-                <LinearLayout
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="فعالیت بدنی ناچیز روزمره (ضریب ۱.۲)"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp"
+                            android:layout_marginTop="2dp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Activity Option 2: Light (Selected Default) -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardActLight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="10dp">
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="2dp"
+                    app:strokeColor="@color/primary"
+                    app:cardBackgroundColor="@color/primary_light"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_marginBottom="8dp">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        app:boxStrokeColor="@color/primary"
-                        android:hint="سن (سال)"
-                        android:layout_marginEnd="8dp">
+                        android:orientation="vertical"
+                        android:padding="12dp">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etAge"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/tvActLightTitle"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:inputType="number"
-                            android:text="26"
-                            android:gravity="center" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                            android:text="🚶 تحرک سبک (۱ تا ۳ روز ورزش در هفته)"
+                            android:textColor="@color/primary"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        app:boxStrokeColor="@color/primary"
-                        android:hint="قد (سانتی‌متر)">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etHeight"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:inputType="numberDecimal"
-                            android:text="178"
-                            android:gravity="center" />
-                    </com.google.android.material.textfield.TextInputLayout>
-                </LinearLayout>
+                            android:text="پیاده‌روی روزانه یا تمرین سبک (ضریب ۱.۳۷۵)"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp"
+                            android:layout_marginTop="2dp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
-                <!-- Current Weight & Target Weight Row -->
-                <LinearLayout
+                <!-- Activity Option 3: Moderate -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardActModerate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="12dp">
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/card_border"
+                    app:cardBackgroundColor="@color/surface_white"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_marginBottom="8dp">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        app:boxStrokeColor="@color/primary"
-                        android:hint="وزن فعلی (kg)"
-                        android:layout_marginEnd="8dp">
+                        android:orientation="vertical"
+                        android:padding="12dp">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etWeight"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/tvActModerateTitle"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:inputType="numberDecimal"
-                            android:text="78"
-                            android:gravity="center" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                            android:text="🏃 تحرک متوسط (۳ تا ۵ روز ورزش در هفته)"
+                            android:textColor="@color/text_primary"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        app:boxStrokeColor="@color/primary"
-                        android:hint="وزن هدف (kg)">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etTargetWeight"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:inputType="numberDecimal"
-                            android:text="72"
-                            android:gravity="center" />
-                    </com.google.android.material.textfield.TextInputLayout>
-                </LinearLayout>
+                            android:text="تمرینات منظم باشگاهی یا هوازی (ضریب ۱.۵۵)"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp"
+                            android:layout_marginTop="2dp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
-                <!-- Activity Level -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="سطح فعالیت بدنی هفتگی:"
-                    android:textColor="@color/text_primary"
-                    android:textSize="13sp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="4dp" />
-
-                <Spinner
-                    android:id="@+id/spActivityLevel"
+                <!-- Activity Option 4: Active -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardActActive"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@drawable/bg_card_clean"
-                    android:paddingHorizontal="12dp" />
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/card_border"
+                    app:cardBackgroundColor="@color/surface_white"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:id="@+id/tvActActiveTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="⚡ تحرک بالا و ورزشکار حرفه‌ای"
+                            android:textColor="@color/text_primary"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="تمرین روزانه فشرده یا کار فیزیکی سنگین (ضریب ۱.۷۲۵)"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp"
+                            android:layout_marginTop="2dp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -323,7 +534,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="۳. انتخاب رژیم معروف دنیا"
+                    android:text="۳. انتخاب الگوی رژیم غذایی"
                     android:textColor="@color/primary"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -332,97 +543,264 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="نسبت ماکروها بر اساس رژیم انتخابی تنظیم می‌شود:"
+                    android:text="توزیع کالری و گرم پروتئین، کربوهیدرات و چربی بر اساس رژیم انتخابی تنظیم می‌شود:"
                     android:textColor="@color/text_secondary"
                     android:textSize="12sp"
-                    android:layout_marginBottom="12dp" />
+                    android:layout_marginBottom="14dp" />
 
-                <RadioGroup
-                    android:id="@+id/rgDietType"
+                <!-- Diet 1: Balanced (Default) -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardDietBalanced"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="2dp"
+                    app:strokeColor="@color/primary"
+                    app:cardBackgroundColor="@color/primary_light"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_marginBottom="8dp">
 
-                    <RadioButton
-                        android:id="@+id/rbDietBalanced"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="رژیم بالانس استاندارد (۵۰٪ کربو، ۲۰٪ پروتئین، ۳۰٪ چربی)"
-                        android:textColor="@color/text_primary"
-                        android:textSize="13sp"
-                        android:checked="true"
-                        android:padding="6dp" />
+                        android:orientation="vertical"
+                        android:padding="12dp">
 
-                    <RadioButton
-                        android:id="@+id/rbDietHighProtein"
+                        <TextView
+                            android:id="@+id/tvDietBalancedTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🥗 رژیم بالانس استاندارد"
+                            android:textColor="@color/primary"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="۵۰٪ کربوهیدرات | ۲۰٪ پروتئین | ۳۰٪ چربی"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp"
+                            android:layout_marginTop="2dp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Diet 2: High Protein -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardDietHighProtein"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/card_border"
+                    app:cardBackgroundColor="@color/surface_white"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_marginBottom="8dp">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="رژیم پروتئین بالا / فیتنس (۳۵٪ پروتئین، ۴۰٪ کربو، ۲۵٪ چربی)"
-                        android:textColor="@color/text_primary"
-                        android:textSize="13sp"
-                        android:padding="6dp" />
+                        android:orientation="vertical"
+                        android:padding="12dp">
 
-                    <RadioButton
-                        android:id="@+id/rbDietKeto"
+                        <TextView
+                            android:id="@+id/tvDietHighProteinTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🥩 پروتئین بالا / فیتنس و عضله‌سازی"
+                            android:textColor="@color/text_primary"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="۳۵٪ پروتئین | ۴۰٪ کربوهیدرات | ۲۵٪ چربی"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp"
+                            android:layout_marginTop="2dp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Diet 3: Keto -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardDietKeto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/card_border"
+                    app:cardBackgroundColor="@color/surface_white"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_marginBottom="8dp">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="رژیم کتوژنیک (۷۰٪ چربی سالم، ۲۵٪ پروتئین، ۵٪ کربو)"
-                        android:textColor="@color/text_primary"
-                        android:textSize="13sp"
-                        android:padding="6dp" />
+                        android:orientation="vertical"
+                        android:padding="12dp">
 
-                    <RadioButton
-                        android:id="@+id/rbDietMed"
+                        <TextView
+                            android:id="@+id/tvDietKetoTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🥑 رژیم کتوژنیک (Keto)"
+                            android:textColor="@color/text_primary"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="۷۰٪ چربی سالم | ۲۵٪ پروتئین | ۵٪ کربوهیدرات"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp"
+                            android:layout_marginTop="2dp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Diet 4: Mediterranean -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardDietMed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/card_border"
+                    app:cardBackgroundColor="@color/surface_white"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_marginBottom="8dp">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="رژیم مدیترانه‌ای (۴۵٪ کربو، ۲۰٪ پروتئین، ۳۵٪ چربی)"
-                        android:textColor="@color/text_primary"
-                        android:textSize="13sp"
-                        android:padding="6dp" />
+                        android:orientation="vertical"
+                        android:padding="12dp">
 
-                    <RadioButton
-                        android:id="@+id/rbDietCustom"
+                        <TextView
+                            android:id="@+id/tvDietMedTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🫒 رژیم مدیترانه‌ای"
+                            android:textColor="@color/text_primary"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="۴۵٪ کربوهیدرات | ۲۰٪ پروتئین | ۳۵٪ چربی سالم"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp"
+                            android:layout_marginTop="2dp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Diet 5: Custom -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardDietCustom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/card_border"
+                    app:cardBackgroundColor="@color/surface_white"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="رژیم شخصی‌سازی شده (تنظیم آزادانه در ادامه)"
-                        android:textColor="@color/text_primary"
-                        android:textSize="13sp"
-                        android:padding="6dp" />
-                </RadioGroup>
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:id="@+id/tvDietCustomTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="⚙️ رژیم شخصی‌سازی شده"
+                            android:textColor="@color/text_primary"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="تنظیم آزادانه درشت‌مغذی‌ها در برنامه"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp"
+                            android:layout_marginTop="2dp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
                 <!-- DYNAMIC METABOLIC CALCULATION PREVIEW CARD -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:background="@drawable/bg_pill_emerald"
+                    android:background="@drawable/bg_card_emerald"
                     android:padding="16dp"
                     android:layout_marginTop="16dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="نتایج متابولیسم انحصاری شما:"
+                        android:text="📊 تحلیل متابولیسم انحصاری شما:"
                         android:textColor="@color/primary_dark"
                         android:textSize="13sp"
                         android:textStyle="bold" />
+
+                    <!-- BMR & TDEE Row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="6dp">
+
+                        <TextView
+                            android:id="@+id/tvLiveBMR"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="متابولیسم پایه (BMR): ۱,۶۸۰ kcal"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:id="@+id/tvLiveTDEE"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="مصرف روزانه (TDEE): ۲,۳۱۰ kcal"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp" />
+                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/tvLiveTargetCalories"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="کالری هدف روزانه: ۱,۸۵۰ kcal"
+                        android:text="🎯 کالری هدف روزانه: ۱,۸۱۰ kcal"
                         android:textColor="@color/primary"
-                        android:textSize="18sp"
+                        android:textSize="17sp"
                         android:textStyle="bold"
-                        android:layout_marginTop="4dp" />
+                        android:layout_marginTop="6dp" />
 
                     <TextView
                         android:id="@+id/tvLiveMacrosPreview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="پروتئین: ۱۲۰g | کربوهیدرات: ۱۸۵g | چربی: ۵۰g"
-                        android:textColor="@color/text_secondary"
+                        android:text="پروتئین: ۱۲۵g | کربوهیدرات: ۱۸۰g | چربی: ۴۵g"
+                        android:textColor="@color/text_primary"
                         android:textSize="12sp"
                         android:layout_marginTop="4dp" />
                 </LinearLayout>
@@ -434,9 +812,9 @@
             android:id="@+id/btnSubmitOnboarding"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:text="ذخیره پروفایل و ورود به دیگچه"
+            android:text="ذخیره مشخصات و ورود به دیگچـه"
             android:textColor="@color/surface_white"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             app:backgroundTint="@color/primary"
             app:cornerRadius="18dp" />

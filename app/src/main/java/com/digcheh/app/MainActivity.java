@@ -44,11 +44,11 @@ public class MainActivity extends AppCompatActivity {
     private Calendar currentCalendar = Calendar.getInstance();
 
     // UI Views
-    private TextView tvHeaderGreeting, tvDietSubtitle;
+    private TextView tvHeaderGreeting, tvDietSubtitle, tvHeroDietBadge;
     private TextView tvCheatMealStatus, tvDateDisplay;
-    private TextView tvTotalCalories, tvCalorieTarget;
+    private TextView tvTotalCalories, tvCalEaten, tvCalPercent, tvCalTarget;
     private ProgressBar pbMainCalories;
-    private TextView tvProteinCount, tvCarbCount, tvFatCount;
+    private TextView tvProteinCount, tvProteinTarget, tvCarbCount, tvCarbTarget, tvFatCount, tvFatTarget;
     private ProgressBar pbProtein, pbCarb, pbFat;
     private TextView tvBurnedCalories;
 
@@ -74,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
         setupListeners();
         updateDateDisplay();
         refreshAllData();
+
+        FontHelper.applyVazirmatn(getWindow().getDecorView(), this);
     }
 
     @Override
@@ -81,22 +83,29 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         if (dataManager != null && dataManager.isUserOnboarded()) {
             refreshAllData();
+            FontHelper.applyVazirmatn(getWindow().getDecorView(), this);
         }
     }
 
     private void initViews() {
         tvHeaderGreeting = findViewById(R.id.tvHeaderGreeting);
         tvDietSubtitle = findViewById(R.id.tvDietSubtitle);
+        tvHeroDietBadge = findViewById(R.id.tvHeroDietBadge);
         tvCheatMealStatus = findViewById(R.id.tvCheatMealStatus);
         tvDateDisplay = findViewById(R.id.tvDateDisplay);
 
         tvTotalCalories = findViewById(R.id.tvTotalCalories);
-        tvCalorieTarget = findViewById(R.id.tvCalorieTarget);
+        tvCalEaten = findViewById(R.id.tvCalEaten);
+        tvCalPercent = findViewById(R.id.tvCalPercent);
+        tvCalTarget = findViewById(R.id.tvCalTarget);
         pbMainCalories = findViewById(R.id.pbMainCalories);
 
         tvProteinCount = findViewById(R.id.tvProteinCount);
+        tvProteinTarget = findViewById(R.id.tvProteinTarget);
         tvCarbCount = findViewById(R.id.tvCarbCount);
+        tvCarbTarget = findViewById(R.id.tvCarbTarget);
         tvFatCount = findViewById(R.id.tvFatCount);
+        tvFatTarget = findViewById(R.id.tvFatTarget);
 
         pbProtein = findViewById(R.id.pbProtein);
         pbCarb = findViewById(R.id.pbCarb);
@@ -123,6 +132,12 @@ public class MainActivity extends AppCompatActivity {
     private void setupListeners() {
         // Brand Header click -> edit profile & diet
         findViewById(R.id.layoutBrandHeader).setOnClickListener(v -> {
+            Intent intent = new Intent(this, OnboardingActivity.class);
+            startActivity(intent);
+        });
+
+        // Edit profile banner at bottom
+        findViewById(R.id.cardEditProfileBanner).setOnClickListener(v -> {
             Intent intent = new Intent(this, OnboardingActivity.class);
             startActivity(intent);
         });
@@ -170,8 +185,8 @@ public class MainActivity extends AppCompatActivity {
 
     private String getMonthName(int month) {
         String[] months = {"فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"};
-        // Gregorian to Persian mapping approximation for display
-        return "مهر";
+        int persianMonthIdx = (month + 9) % 12;
+        return months[persianMonthIdx];
     }
 
     private void refreshAllData() {
@@ -182,7 +197,10 @@ public class MainActivity extends AppCompatActivity {
         int fatGoal = profile.getTargetFat();
 
         tvHeaderGreeting.setText("سلام، " + profile.getName());
-        tvDietSubtitle.setText("رژیم: " + profile.getDietNameFa() + " • برای تغییر ضربه بزنید");
+        tvDietSubtitle.setText("رژیم: " + profile.getDietNameFa());
+        if (tvHeroDietBadge != null) {
+            tvHeroDietBadge.setText(profile.getDietNameFa());
+        }
 
         // 1. Cheat meal status
         int cheatDays = dataManager.getCheatCycleDays();
@@ -191,27 +209,36 @@ public class MainActivity extends AppCompatActivity {
         // 2. Bento Matrix Calculations
         int totalConsumed = dataManager.getTotalConsumedCalories();
         int totalBurned = dataManager.getBurnedCalories();
-        int netCalories = Math.max(0, totalConsumed - totalBurned);
+        int netEaten = Math.max(0, totalConsumed - totalBurned);
+        int remainingCalories = Math.max(0, calorieGoal - netEaten);
 
-        tvTotalCalories.setText(toPersianDigits(netCalories));
-        tvCalorieTarget.setText("از " + toPersianDigits(calorieGoal) + " kcal");
+        tvTotalCalories.setText(toPersianDigits(remainingCalories));
+        tvCalEaten.setText("مصرفی: " + toPersianDigits(totalConsumed));
+
+        int percent = calorieGoal > 0 ? (int) Math.round((totalConsumed * 100.0) / calorieGoal) : 0;
+        tvCalPercent.setText(toPersianDigits(percent) + "٪ پر شده");
+        tvCalTarget.setText("سقف: " + toPersianDigits(calorieGoal));
+
         pbMainCalories.setMax(calorieGoal);
-        pbMainCalories.setProgress(Math.min(netCalories, calorieGoal));
+        pbMainCalories.setProgress(Math.min(totalConsumed, calorieGoal));
 
         // Macros
         int totalProt = dataManager.getTotalProtein();
         int totalCarb = dataManager.getTotalCarbs();
         int totalFat = dataManager.getTotalFat();
 
-        tvProteinCount.setText(toPersianDigits(totalProt) + "g / " + toPersianDigits(proteinGoal) + "g");
+        tvProteinCount.setText(toPersianDigits(totalProt) + "g");
+        tvProteinTarget.setText("هدف: " + toPersianDigits(proteinGoal) + "g");
         pbProtein.setMax(proteinGoal);
         pbProtein.setProgress(Math.min(totalProt, proteinGoal));
 
-        tvCarbCount.setText(toPersianDigits(totalCarb) + "g / " + toPersianDigits(carbGoal) + "g");
+        tvCarbCount.setText(toPersianDigits(totalCarb) + "g");
+        tvCarbTarget.setText("هدف: " + toPersianDigits(carbGoal) + "g");
         pbCarb.setMax(carbGoal);
         pbCarb.setProgress(Math.min(totalCarb, carbGoal));
 
-        tvFatCount.setText(toPersianDigits(totalFat) + "g / " + toPersianDigits(fatGoal) + "g");
+        tvFatCount.setText(toPersianDigits(totalFat) + "g");
+        tvFatTarget.setText("هدف: " + toPersianDigits(fatGoal) + "g");
         pbFat.setMax(fatGoal);
         pbFat.setProgress(Math.min(totalFat, fatGoal));
 
@@ -223,6 +250,8 @@ public class MainActivity extends AppCompatActivity {
         renderMeal("lunch", llLunchItems, tvLunchCalories, tvLunchEmpty);
         renderMeal("dinner", llDinnerItems, tvDinnerCalories, tvDinnerEmpty);
         renderMeal("snack", llSnacksItems, tvSnacksCalories, tvSnacksEmpty);
+
+        FontHelper.applyVazirmatn(getWindow().getDecorView(), this);
     }
 
     private void renderMeal(String mealType, LinearLayout container, TextView tvCalories, TextView tvEmpty) {
@@ -240,6 +269,7 @@ public class MainActivity extends AppCompatActivity {
 
             for (LoggedFood food : foods) {
                 View itemView = inflater.inflate(R.layout.item_meal_food, container, false);
+                FontHelper.applyVazirmatn(itemView, this);
 
                 TextView tvName = itemView.findViewById(R.id.tvFoodName);
                 TextView tvQty = itemView.findViewById(R.id.tvFoodQuantity);
@@ -256,7 +286,7 @@ public class MainActivity extends AppCompatActivity {
                 tvFoodCals.setText(toPersianDigits(food.getCalories()) + " kcal");
 
                 tvProtBadge.setText("پروتئین: " + toPersianDigits(food.getProtein()) + "g");
-                tvCarbBadge.setText("کربوهیدرات: " + toPersianDigits(food.getCarbs()) + "g");
+                tvCarbBadge.setText("کربو: " + toPersianDigits(food.getCarbs()) + "g");
                 tvFatBadge.setText("چربی: " + toPersianDigits(food.getFat()) + "g");
 
                 // Progressive Disclosure (Accordion)
@@ -285,6 +315,7 @@ public class MainActivity extends AppCompatActivity {
     private void showAddFoodBottomSheet(String mealType, String mealTitleFa) {
         BottomSheetDialog dialog = new BottomSheetDialog(this);
         View sheetView = LayoutInflater.from(this).inflate(R.layout.bottom_sheet_add_food, null);
+        FontHelper.applyVazirmatn(sheetView, this);
         dialog.setContentView(sheetView);
 
         TextView tvSheetTitle = sheetView.findViewById(R.id.tvSheetTitle);
@@ -313,6 +344,7 @@ public class MainActivity extends AppCompatActivity {
             spUnit.setAdapter(spinnerAdapter);
 
             updateCalculatedPreview(selectedFood[0], etQuantity, tvLiveCalories);
+            FontHelper.applyVazirmatn(layoutConfig, this);
         });
         rvResults.setAdapter(adapter);
 
@@ -409,7 +441,9 @@ public class MainActivity extends AppCompatActivity {
     private void showCheatMealDialog() {
         Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_cheat_meal);
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_cheat_meal, null);
+        FontHelper.applyVazirmatn(dialogView, this);
+        dialog.setContentView(dialogView);
         if (dialog.getWindow() != null) {
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         }

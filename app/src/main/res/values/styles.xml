@@ -12,6 +12,21 @@
         <item name="fontFamily">@font/vazirmatn</item>
         <item name="android:fontFamily">@font/vazirmatn</item>
 
+        <!-- Material Components Typography Override -->
+        <item name="textAppearanceHeadline1">@style/AppTextAppearance.Headline</item>
+        <item name="textAppearanceHeadline2">@style/AppTextAppearance.Headline</item>
+        <item name="textAppearanceHeadline3">@style/AppTextAppearance.Headline</item>
+        <item name="textAppearanceHeadline4">@style/AppTextAppearance.Headline</item>
+        <item name="textAppearanceHeadline5">@style/AppTextAppearance.Headline</item>
+        <item name="textAppearanceHeadline6">@style/AppTextAppearance.Headline</item>
+        <item name="textAppearanceSubtitle1">@style/AppTextAppearance</item>
+        <item name="textAppearanceSubtitle2">@style/AppTextAppearance</item>
+        <item name="textAppearanceBody1">@style/AppTextAppearance</item>
+        <item name="textAppearanceBody2">@style/AppTextAppearance</item>
+        <item name="textAppearanceButton">@style/AppTextAppearance.Button</item>
+        <item name="textAppearanceCaption">@style/AppTextAppearance</item>
+        <item name="textAppearanceOverline">@style/AppTextAppearance</item>
+
         <!-- Window & Backgrounds -->
         <item name="android:windowBackground">@color/background</item>
         <item name="android:statusBarColor">@color/background</item>
@@ -24,6 +39,25 @@
 
         <!-- BottomSheetDialog theme -->
         <item name="bottomSheetDialogTheme">@style/CustomBottomSheetDialog</item>
+    </style>
+
+    <style name="AppTextAppearance" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/vazirmatn</item>
+        <item name="android:fontFamily">@font/vazirmatn</item>
+    </style>
+
+    <style name="AppTextAppearance.Headline" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="fontFamily">@font/vazirmatn</item>
+        <item name="android:fontFamily">@font/vazirmatn</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AppTextAppearance.Button" parent="TextAppearance.MaterialComponents.Button">
+        <item name="fontFamily">@font/vazirmatn</item>
+        <item name="android:fontFamily">@font/vazirmatn</item>
+        <item name="android:textStyle">bold</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textAllCaps">false</item>
     </style>
 
     <style name="CustomBottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">

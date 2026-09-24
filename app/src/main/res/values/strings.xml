@@ -21,6 +21,7 @@
     <string name="lunch_title">ناهار</string>
     <string name="dinner_title">شام</string>
     <string name="snack_title">میان‌وعده‌ها</string>
+    <string name="snacks_title">میان‌وعده‌ها</string>
     <string name="add_food_btn">+ افزودن</string>
     <string name="empty_meal">هنوز غذایی ثبت نشده است</string>
 

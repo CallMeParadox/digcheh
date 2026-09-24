@@ -33,6 +33,7 @@ public class FoodSearchAdapter extends RecyclerView.Adapter<FoodSearchAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_food_search, parent, false);
+        FontHelper.applyVazirmatn(view, parent.getContext());
         return new ViewHolder(view);
     }
 
