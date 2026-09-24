@@ -301,19 +301,6 @@ public class MainActivity extends AppCompatActivity {
 
         final FoodItem[] selectedFood = new FoodItem[1];
 
-        com.google.android.material.chip.ChipGroup chipGroup = sheetView.findViewById(R.id.chipGroupCategories);
-        chipGroup.setOnCheckedChangeListener((group, checkedId) -> {
-            if (checkedId == R.id.chipCatStews) adapter.setCategory("خورش‌ها");
-            else if (checkedId == R.id.chipCatRice) adapter.setCategory("برنج و پلو");
-            else if (checkedId == R.id.chipCatDrinks) adapter.setCategory("نوشیدنی و کافه");
-            else if (checkedId == R.id.chipCatKebabs) adapter.setCategory("کباب‌ها");
-            else if (checkedId == R.id.chipCatBreakfast) adapter.setCategory("صبحانه و لبنیات");
-            else if (checkedId == R.id.chipCatTrad) adapter.setCategory("سنتی و آش");
-            else if (checkedId == R.id.chipCatFast) adapter.setCategory("فست‌فود");
-            else if (checkedId == R.id.chipCatSnack) adapter.setCategory("میوه و میان‌وعده");
-            else adapter.setCategory("همه");
-        });
-
         // Search adapter setup
         rvResults.setLayoutManager(new LinearLayoutManager(this));
         FoodSearchAdapter adapter = new FoodSearchAdapter(dataManager.getFoodCatalog(), food -> {
@@ -328,6 +315,19 @@ public class MainActivity extends AppCompatActivity {
             updateCalculatedPreview(selectedFood[0], etQuantity, tvLiveCalories);
         });
         rvResults.setAdapter(adapter);
+
+        com.google.android.material.chip.ChipGroup chipGroup = sheetView.findViewById(R.id.chipGroupCategories);
+        chipGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == R.id.chipCatStews) adapter.setCategory("خورش‌ها");
+            else if (checkedId == R.id.chipCatRice) adapter.setCategory("برنج و پلو");
+            else if (checkedId == R.id.chipCatDrinks) adapter.setCategory("نوشیدنی و کافه");
+            else if (checkedId == R.id.chipCatKebabs) adapter.setCategory("کباب‌ها");
+            else if (checkedId == R.id.chipCatBreakfast) adapter.setCategory("صبحانه و لبنیات");
+            else if (checkedId == R.id.chipCatTrad) adapter.setCategory("سنتی و آش");
+            else if (checkedId == R.id.chipCatFast) adapter.setCategory("فست‌فود");
+            else if (checkedId == R.id.chipCatSnack) adapter.setCategory("میوه و میان‌وعده");
+            else adapter.setCategory("همه");
+        });
 
         spUnit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
