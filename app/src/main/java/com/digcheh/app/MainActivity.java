@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -20,6 +21,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -299,6 +301,19 @@ public class MainActivity extends AppCompatActivity {
 
         final FoodItem[] selectedFood = new FoodItem[1];
 
+        com.google.android.material.chip.ChipGroup chipGroup = sheetView.findViewById(R.id.chipGroupCategories);
+        chipGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == R.id.chipCatStews) adapter.setCategory("خورش‌ها");
+            else if (checkedId == R.id.chipCatRice) adapter.setCategory("برنج و پلو");
+            else if (checkedId == R.id.chipCatDrinks) adapter.setCategory("نوشیدنی و کافه");
+            else if (checkedId == R.id.chipCatKebabs) adapter.setCategory("کباب‌ها");
+            else if (checkedId == R.id.chipCatBreakfast) adapter.setCategory("صبحانه و لبنیات");
+            else if (checkedId == R.id.chipCatTrad) adapter.setCategory("سنتی و آش");
+            else if (checkedId == R.id.chipCatFast) adapter.setCategory("فست‌فود");
+            else if (checkedId == R.id.chipCatSnack) adapter.setCategory("میوه و میان‌وعده");
+            else adapter.setCategory("همه");
+        });
+
         // Search adapter setup
         rvResults.setLayoutManager(new LinearLayoutManager(this));
         FoodSearchAdapter adapter = new FoodSearchAdapter(dataManager.getFoodCatalog(), food -> {
@@ -313,6 +328,17 @@ public class MainActivity extends AppCompatActivity {
             updateCalculatedPreview(selectedFood[0], etQuantity, tvLiveCalories);
         });
         rvResults.setAdapter(adapter);
+
+        spUnit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (selectedFood[0] != null) {
+                    updateCalculatedPreview(selectedFood[0], etQuantity, tvLiveCalories);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
 
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -360,6 +386,9 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, selectedFood[0].getName() + " به " + mealTitleFa + " اضافه شد", Toast.LENGTH_SHORT).show();
         });
 
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        }
         dialog.show();
     }
 
